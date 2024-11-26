@@ -9,19 +9,20 @@
             padding: 0;
         }
         .Options {
-            margin-left: 10px;
+            margin-left: 42px;
             text-decoration: none;
-            color: #424242;
+            color: #868282;
             font-family: "Inter", "serif";
             cursor: pointer;
+            font-size: 15px;
         }
         .nav-links {
-            margin-left: 1200px; /* Adds space between the logo and the links */
+            margin-left: 500px; /* Adds space between the logo and the links */
         }
         .logo {
             padding-top: 20px;
-            margin-left: 120px;
-            width: 130px;
+            margin-left: 420px;
+            width: 130px
         }
         .border {
             border-top: 2px solid rgba(180, 178, 178, 0.884); /* Ensure full-width border */
@@ -29,15 +30,37 @@
             padding-top: 20px; /* Optional padding to add space within the image div */
         }
         .Big_picture {
-            width: 55%; /* Ensures the image takes up full container width */
+            width: 60%; /* Ensures the image takes up full container width */
             margin-top: 100px;
-            margin-left: 450px;
+            margin-left: 430px;
+        }
+        .Gap {
+            margin-top: 50px;
+        }
+        .Invest {
+            font-size: 50px;
+            text-align: center;
+            font-family: "Inter", "serif";
+            color: #424242;
+        }
+        .details {
+            margin-top: 10px;
+            font-size: 20px;
+            text-align: center;
+            font-family: "Inter", "serif";
+            color: #424242;
+        }
+        .bn {
+            margin-top: 25px;
+            text-align: center;
         }
     </style>
 </html>
 <body>
     <div>
-        <img src="https://zerodha.com/static/images/logo.svg" class="logo">
+        <span>
+            <img src="https://zerodha.com/static/images/logo.svg" class="logo">
+        </span>
         <span class="nav-links">
             <a href="https://signup.zerodha.com/" class="Options">
                 Signup
@@ -56,4 +79,16 @@
     <div class="border">
         <img src="https://zerodha.com/static/images/landing.png" class="Big_picture"/>
     </div>
+    <div class="Gap">
+        <div class="Invest">
+            Invest in everything
+        </div>
+        <div class = "details">
+            Online platform to invest in stocks, derivatives, mutual funds, ETFs, bonds, and more.
+        </div>
+    </div>
+    <div class="bn">
+        <button style="background-color: #387ed1; color: white; padding: 10px 20px; font-size: 20px; border: none; cursor: pointer;">
+            Sign up for free
+        </button>
 </body>
