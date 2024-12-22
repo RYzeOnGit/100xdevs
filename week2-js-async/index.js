@@ -14,4 +14,4 @@ function print(err, data) {
 fs.readFile("a.txt", "utf8", print);
 fs.readFile("b.txt", "utf8", print);
 console.log("Done");
-setTimeout(() => console.log("After 2 seconds"), 2000);
+setTimeout(() => console.log("After 2 seconds"), 2000); //Prints after 2 seconds
