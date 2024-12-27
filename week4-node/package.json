@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.mjs"
+    "start": "node index.mjs",
+    "build": "todo.js"
   },
   "keywords": [],
   "author": "",
