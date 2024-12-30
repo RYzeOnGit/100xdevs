@@ -24,8 +24,7 @@ app.get('/', (req, res) => {
     else{
         res.send(todos);
     }
-  const sum =   n*(n+1)/2;
-  res.send(`Sum of 1 to ${n} is ${sum}`);
+    });
 })
 app.post('/', (req, res) => {
     res.send('POST request to the homepage');
