@@ -102,6 +102,47 @@ app.post('/', (req, res) => {
     });
 });
 app.delete('/', (req, res) => {
-    res.send('DELETE request to the homepage');
-  })
+    const n = parseInt(req.query.n);
+    fs.readFile(filepath, 'utf8', (err, data) => {
+          if (err) {
+            res.log(err);
+          }
+          let todos = [];
+          try {
+            todos = JSON.parse(data);
+          } catch (err) {
+            todos = [];
+          }
+          let found = false;
+          temp = -1;
+          for (let i = 0; i < todos.length; i++) {
+            if (todos[i].id === n) {
+              temp = i;  
+              todos.splice(i, 1);
+              found = true;
+              break;
+            }
+          }
+          if (found){
+            for (let i = 0; i < todos.length; i++) {
+              if(i >= temp){
+                todos[i].id = todos[i].id - 1;
+              }
+            }
+          }
+          if (!found){
+            console.log('Task not found');  
+          }
+          fs.writeFile(filepath, JSON.stringify(todos), (err) => {
+            if (err) {
+              res.send(err);
+            } else {
+              if (found){
+              res.send(`Task deleted`);
+              res.send(todos
+              }
+            }
+          });
+        });
+  });
 app.listen(3000); //start server
