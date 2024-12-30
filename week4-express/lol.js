@@ -6,8 +6,6 @@ const app = express();
 const filepath = "./todos.json";
 //Route handler
 app.get('/', (req, res) => {
-  const n = req.query.n;
-  n = n.trim().toLowerCase();
   fs.readFile(filepath, 'utf8', (err, data) => {
     if (err) {
       console.log(err);
