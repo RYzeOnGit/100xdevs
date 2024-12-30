@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     });
 });
 app.post('/', (req, res) => {
-    const n = req.body.n; // Get the task from the request body
+    const n = req.query.n; // Get the task from the request body
 
     // Read the file
     fs.readFile(filepath, "utf8", (err, data) => {
