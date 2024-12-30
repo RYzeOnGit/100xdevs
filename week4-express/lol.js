@@ -139,7 +139,7 @@ app.delete('/', (req, res) => {
             } else {
               if (found){
               res.send(`Task deleted`);
-              res.send(todos
+              res.send(todos);
               }
             }
           });
