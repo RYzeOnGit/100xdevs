@@ -6,6 +6,8 @@ let request_count = 0;
 
 function requests(req, res, next){
     request_count++;
+    req.name = "Ryan";
+    console.log(req.name);
     console.log(request_count);
     next();
 }
