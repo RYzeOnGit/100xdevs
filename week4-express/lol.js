@@ -36,6 +36,7 @@ app.post('/', (req, res) => {
               } catch (err) {
                   todos = [];
               }
+            });
               todos.push({ title: n, id: todos.length + 1 });
               fs.writeFile(filepath, JSON.stringify(todos), (err) => {
                   if (err) {
@@ -44,6 +45,7 @@ app.post('/', (req, res) => {
                       res.send(`Task added: ${n}`);
                   }
               });
+
   })
 app.put('/', (req, res) => {
     n = req.query.n; //Id to update
