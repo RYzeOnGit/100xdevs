@@ -17,3 +17,4 @@ app.get('/multiply', function(req, res) {
         result: parseInt(a) * parseInt(b)
     })
 })
+app.listen(3000);
