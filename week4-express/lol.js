@@ -8,7 +8,7 @@ const filepath = "./todos.json";
 app.get('/', (req, res) => {
   fs.readFile(filepath, 'utf8', (err, data) => {
     if (err) {
-      console.log(err);
+      res.send(err);
     }
     let todos = [];
     try {
@@ -25,10 +25,28 @@ app.get('/', (req, res) => {
     });
 })
 app.post('/', (req, res) => {
-    res.send('POST request to the homepage');
+    n = req.body.n;
+    fs.readFile(filepath, "utf8", (err, data) => {
+              if (err) {
+                  res.send(err);
+              }
+              let todos = [];
+              try {
+                  todos = JSON.parse(data);
+              } catch (err) {
+                  todos = [];
+              }
+              todos.push({ title: n, id: todos.length + 1 });
+              fs.writeFile(filepath, JSON.stringify(todos), (err) => {
+                  if (err) {
+                      res.send(err);
+                  } else {
+                      res.send(`Task added: ${n}`);
+                  }
+              });
   })
 app.put('/', (req, res) => {
-    res.send('PUT request to the homepage');
+    n = req.query.n; //Id to update
   })
 app.delete('/', (req, res) => {
     res.send('DELETE request to the homepage');
