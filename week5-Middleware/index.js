@@ -25,6 +25,7 @@ function multiplyhandler(req, res){
         result: parseInt(a) * parseInt(b)
     })
 }
+// app.use(requests); alternative implementation of middleware
 app.get('/sum/:a/:b', requests, sumhandler);
 
 app.get('/multiply', requests, multiplyhandler); 
