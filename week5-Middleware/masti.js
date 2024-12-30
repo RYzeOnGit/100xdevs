@@ -12,3 +12,10 @@ function transform(x){
 }  
 const arr2 = arr.map(transform);
 console.log(arr2); // [2,4,6,8,10]
+
+//filter implementation
+function isEven(x){
+    return x % 2 === 0;
+}
+const ans = arr.filter(isEven);
+console.log(ans); // [2,4]
