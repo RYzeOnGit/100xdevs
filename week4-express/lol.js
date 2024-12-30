@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     } catch (err) {
       todos = [];
     }
-    if (!todos){
+    if (todos.length === 0) {
         res.send('No tasks found');
     }
     else{
