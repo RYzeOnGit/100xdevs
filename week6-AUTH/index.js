@@ -45,6 +45,7 @@ app.post('/signin', function(req, res) {
     }
     if (foundUser) {
         const token = generateToken();
+        foundUser.token = token;
         res.json({
             message: "You are signed in!",
             token: token
@@ -58,4 +59,28 @@ app.post('/signin', function(req, res) {
     console.log(users);
 });
 
+app.get('/me', function(req, res) {
+    const token = req.headers.token;
+    let found = null;
+
+    for(let i = 0; i < users.length; i++) {
+        if(users[i].token === token) {
+            found = users[i];
+            break;
+        }
+    }
+
+    if (found){
+        res.json({
+            username: found.username,
+            password: found.password
+        });
+    }
+
+    else {
+        res.status(403).send({
+            message: "Invalid token!"
+        });
+    }
+});
 app.listen(3000);
