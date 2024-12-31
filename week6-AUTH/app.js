@@ -1,3 +1,4 @@
+// Create a middleware called auth
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const JWT_secret =  "randomRyanBullocksMate";
@@ -7,10 +8,14 @@ const app = express();
 app.use(express.json()); // for parsing application/json middleware function
 
 const users = [];
-// Generation of a random token for the user
 
+// Middleware to keep track of requests
+function logger(req, res, next) {
+    console.log(req.method + "request received");
+    next();
+}
 // signing up
-app.post('/signup', function(req, res) {
+app.post('/signup', logger, function(req, res) {
     const username = req.body.username;
     const password = req.body.password;
 
@@ -32,7 +37,7 @@ app.post('/signup', function(req, res) {
 });
 
 //signing in
-app.post('/signin', function(req, res) {
+app.post('/signin', logger, function(req, res) {
     const username = req.body.username;
     const password = req.body.password;
     
@@ -60,14 +65,27 @@ app.post('/signin', function(req, res) {
     console.log(users);
 });
 
-app.get('/me', function(req, res) {
+// Create a middleware called auth
+function auth(req, res, next) {
     const token = req.headers.token;
-    const decoded = jwt.verify(token, JWT_secret); //JWT implementation
-    const username = decoded.username;
+    const decoded = jwt.verify(token, JWT_secret);
+    if (decoded.username) {
+        req.username = decoded.username;
+        next();
+    }
+    else {
+        res.status(403).send({
+            message: "Invalid token!"
+        });
+    }
+}
+
+   
+app.get('/me', logger, auth, function(req, res) {
     let found = null;
 
     for(let i = 0; i < users.length; i++) {
-        if(users[i].username === username) {
+        if(users[i].username === req.username) {
             found = users[i];
             break;
         }
@@ -77,12 +95,6 @@ app.get('/me', function(req, res) {
         res.json({
             username: found.username,
             password: found.password
-        });
-    }
-
-    else {
-        res.status(403).send({
-            message: "Invalid token!"
         });
     }
 });
