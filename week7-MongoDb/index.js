@@ -50,7 +50,7 @@ app.post("/signin", async function(req, res) {
 });
 
 function auth(req, res, next) {
-    const token = req.header.token;
+    const token = req.headers.token;
 
     const decoded = jwt.verify(token, jwt_secret);
 
