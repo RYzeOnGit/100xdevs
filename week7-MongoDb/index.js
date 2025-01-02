@@ -55,7 +55,7 @@ function auth(req, res, next) {
     const decoded = jwt.verify(token, jwt_secret);
 
     if (decoded) {
-        req.userId = decoded.userId;
+        req.userId = decoded.id;
         next();
     }
     else {
