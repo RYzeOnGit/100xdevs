@@ -2,10 +2,13 @@ const express = require('express');
 const { UserModel, TodoModel } = require('./db');
 
 const jwt = require('jsonwebtoken');
+const { default: mongoose } = require('mongoose');
 const app = express();
 
 app.use(express.json());
 jwt_secret = "menepyaarkiya@8008s.com";
+
+mongoose.connect("mongodb+srv://rchattop:u3bdMQbPVvFzPLdV@practicecluster.jog8h.mongodb.net/todo-Ryan")
 
 app.post("/signup", async function(req, res) {
    const email = req.body.email;
@@ -27,7 +30,7 @@ app.post("/signin", function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const user = UserModel.findOne({
+    const user = UserModel.create({
         email: email,
         password: password
     });
