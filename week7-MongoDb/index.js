@@ -49,11 +49,26 @@ app.post("/signin", async function(req, res) {
     }
 });
 
-app.post("/todo", function(req, res) {
+function auth(req, res, next) {
+    const token = req.header.token;
+
+    const decoded = jwt.verify(token, jwt_secret);
+
+    if (decoded) {
+        req.userId = decoded.userId;
+        next();
+    }
+    else {
+        res.status(403).json({
+            message: "Invalid credentials"
+        });
+    }
+}
+app.post("/todo", auth, function(req, res) {
     // Your code here
 });
 
-app.post("/todos", function(req, res) {
+app.post("/todos", auth, function(req, res) {
 // Your code here
 });
 
