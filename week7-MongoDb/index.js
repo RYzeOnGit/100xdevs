@@ -4,6 +4,7 @@ const { auth, JWT_SECRET } = require("./auth");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const {z} = require("zod");
 
 mongoose.connect("")
 
@@ -12,6 +13,21 @@ const app = express();
 app.use(express.json());
 
 app.post("/signup", async function(req, res) {
+    // defining zod schema
+    const Schema = z.object({
+        email:  z.string().email().min(6).max(100),
+        password: z.string().min(6).max(30),
+        name: z.string().min(2).max(100)
+    });
+
+    const ParseDataWithSuccess = Schema.safeParse(req.body); // returns success and data
+
+    if (!ParseDataWithSuccess.success) {
+        res.status(400).json({
+            message: "Invalid data"
+        });
+        return;
+    }
     const email = req.body.email;
     const password = req.body.password;
     const name = req.body.name;
