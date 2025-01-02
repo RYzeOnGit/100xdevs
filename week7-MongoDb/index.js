@@ -8,14 +8,13 @@ const app = express();
 app.use(express.json());
 jwt_secret = "menepyaarkiya@8008s.com";
 
-mongoose.connect("mongodb+srv://rchattop:u3bdMQbPVvFzPLdV@practicecluster.jog8h.mongodb.net/todo-Ryan")
 
 app.post("/signup", async function(req, res) {
    const email = req.body.email;
    const password = req.body.password;
    const name = req.body.name;
 
-   await UserModel.insert({
+   await UserModel.create({
     email: email,
     password: password,
     name: name
@@ -26,11 +25,11 @@ app.post("/signup", async function(req, res) {
    })
 });
 
-app.post("/signin", function(req, res) {
+app.post("/signin", async function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const user = UserModel.create({
+    const user = await UserModel.findOne({
         email: email,
         password: password
     });

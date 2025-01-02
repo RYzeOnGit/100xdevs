@@ -19,6 +19,6 @@ const UserModel = mongoose.model('users', User);
 const TodoModel = mongoose.model('todos', Todo);
 
 module.exports = {
-    Usermodel: UserModel,
+    UserModel: UserModel,
     TodoModel: TodoModel
 }
