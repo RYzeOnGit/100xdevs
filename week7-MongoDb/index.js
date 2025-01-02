@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 jwt_secret = "menepyaarkiya@8008s.com";
-
+ // mongoose.connect here!
 
 app.post("/signup", async function(req, res) {
    const email = req.body.email;
