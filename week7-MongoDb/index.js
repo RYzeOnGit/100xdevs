@@ -1,75 +1,100 @@
-const express = require('express');
-const { UserModel, TodoModel } = require('./db');
+const express = require("express");
+const { UserModel, TodoModel } = require("./db");
+const { auth, JWT_SECRET } = require("./auth");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-const jwt = require('jsonwebtoken');
-const { default: mongoose } = require('mongoose');
+mongoose.connect("")
+
+
 const app = express();
-
 app.use(express.json());
-jwt_secret = "menepyaarkiya@8008s.com";
- // mongoose.connect here!
 
 app.post("/signup", async function(req, res) {
-   const email = req.body.email;
-   const password = req.body.password;
-   const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const name = req.body.name;
+    let error_ = false;
+    try {
+        const hashedPassword = await bcrypt.hash(password, 5);
 
-   await UserModel.create({
-    email: email,
-    password: password,
-    name: name
-   })
-
-   res.json({
-    message: "User created successfully"
-   })
+        await UserModel.create({
+            email: email,
+            password: hashedPassword,
+            name: name
+        });
+    } catch (e) {
+        console.log("Error creating user");
+        res.status(403).json({
+            message: "User already exists"
+        })
+        error_ = true;
+    }
+    if (!error_) {
+        res.json({
+            message: "You are signed up"
+        })
+    }
 });
+
 
 app.post("/signin", async function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const user = await UserModel.findOne({
-        email: email,
-        password: password
+    const response = await UserModel.findOne({
+        email: email
+    });
+    if (!response) {
+        res.status(403).json({
+            message: "User does not exist"
+        })
+    }
+    const pwd_match = await bcrypt.compare(password, response.password);
+    if (pwd_match) {
+        const token = jwt.sign({
+            id: response._id.toString()
+        }, JWT_SECRET);
+
+        res.json({
+            token
+        })
+    } else {
+        res.status(403).json({
+            message: "Incorrect creds"
+        })
+    }
+});
+
+
+app.post("/todo", auth, async function(req, res) {
+    const userId = req.userId;
+    const title = req.body.title;
+    const done = req.body.done;
+
+    await TodoModel.create({
+        userId,
+        title,
+        done
     });
 
-    if (user) {
-        const token = jwt.sign({
-            id: user._id.toString()
-        }, jwt_secret);
-        res.json({
-            token: token
-            });
-        }
-    else {
-        res.status(403).json({
-            message: "Invalid credentials"
-        });
-    }
+    res.json({
+        message: "Todo created"
+    })
 });
 
-function auth(req, res, next) {
-    const token = req.headers.token;
 
-    const decoded = jwt.verify(token, jwt_secret);
+app.get("/todos", auth, async function(req, res) {
+    const userId = req.userId;
 
-    if (decoded) {
-        req.userId = decoded.id;
-        next();
-    }
-    else {
-        res.status(403).json({
-            message: "Invalid credentials"
-        });
-    }
-}
-app.post("/todo", auth, function(req, res) {
-    // Your code here
-});
+    const todos = await TodoModel.find({
+        userId
+    });
 
-app.post("/todos", auth, function(req, res) {
-// Your code here
+    res.json({
+        todos
+    })
 });
 
 app.listen(3000);
