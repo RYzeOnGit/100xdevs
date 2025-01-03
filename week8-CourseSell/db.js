@@ -1,21 +1,23 @@
 // Schema
-const {Schema} = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 const userSchema = new Schema({
     name: String,
-    email: String,
+    email: {type: String  , unique: true },
     password: String,
-    role: String
 });
 const courseSchema = new Schema({
-    name: String,
+    title: String,
     description: String,
     price: Number,
+    imageURL: String,
+    CreatorId: ObjectId
 });
 const adminSchema = new Schema({
     name: String,
-    email: String,
+    email: {type: String  , unique: true },
     password: String,
-    role: String
 });
 const purchaseSchema = new Schema({
     userId: String,
