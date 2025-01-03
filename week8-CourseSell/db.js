@@ -20,9 +20,8 @@ const adminSchema = new Schema({
     password: String,
 });
 const purchaseSchema = new Schema({
-    userId: String,
-    courseId: String,
-    date: Date
+    userId: ObjectId,
+    courseId: ObjectId
 });
 
 const userModel = mongoose.model('User', userSchema);
