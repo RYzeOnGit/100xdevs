@@ -10,3 +10,7 @@ adminRouter.post('/api/courses', (req, res) => {
 
 adminRouter.get('/api/courses', (req, res) => {       
 });
+
+module.exports = {
+    adminRouter: adminRouter
+}

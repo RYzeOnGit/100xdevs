@@ -2,6 +2,7 @@
 const express = require('express');
 const { userRouter } = require('./user');
 const { courseRouter } = require('./course');
+const { adminRouter } = require('./admin');
 const app = express();
 
 app.use("/user", userRouter);
