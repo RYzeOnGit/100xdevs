@@ -1,8 +1,14 @@
+const { Router } = require('express');
+const courseRouter = Router();
 
 
 
 
-app.post('/api/courses', (req, res) => {
+courseRouter.post('/api/courses', (req, res) => {
 });
-app.get('/api/courses', (req, res) => {
+courseRouter.get('/api/courses', (req, res) => {
 });
+
+module.exports = {
+    courseRouter: courseRouter
+}   
