@@ -1,4 +1,4 @@
-/ Import the JWT module to handle JSON Web Tokens
+// Import the JWT module to handle JSON Web Tokens
 const jwt = require("jsonwebtoken");
 
 // Import the JWT Admin Password from the config file for verification
