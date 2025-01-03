@@ -1,11 +1,16 @@
+const { Router} = require("exoress");
+ const userRouter = Router();
 
 
 
-
-app.post('/user/signin', (req, res) => {
+userRouter.post('/user/signin', (req, res) => {
     
 });
-app.post('/api/courses', (req, res) => {
+userRouter.post('/api/courses', (req, res) => {
 });
-app.get('/api/courses', (req, res) => {
+userRouter.get('/api/courses', (req, res) => {
 });
+
+module.exports = {
+    userRouter: userRouter
+}
