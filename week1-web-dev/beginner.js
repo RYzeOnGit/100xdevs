@@ -54,8 +54,10 @@ for (let i = 0; i < 10; i++) {
     console.log(i);
 }
 
+// while loop - is used to iterate over a collection of values for an unknown number of times.
 let j = 10;
 while (j > 0) {
     console.log(j);
     j--;
 }
+
