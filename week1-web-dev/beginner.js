@@ -26,6 +26,24 @@ let number = 1;
 let string = "Hello";
 let boolean = true;
 let names = ["John", "Jane", "Jim"]; // array is a collection of values.
+console.log(names[3]); // returns undefined because the index is out of bounds.
 
+// Operators 
+let sum = 10 + 2; // Arithmetic operators - +, -, *, /, %, **.
+let canvote = sum > 18; // Comparison operators - >, <, >=, <=, ==, !=, ===, !==.
+let istrue = true && false; // Logical operators - &&, ||, !.
+console.log(sum, canvote, istrue);
 
+// Functions - perks of functions is that they can be reused and can be passed as arguments to other functions.
+function add(a, b) {
+    return a + b;
+}
+console.log(add(1, 2));
 
+// Objects - objects are a collection of key-value pairs.
+let person = {
+    name: "John",
+    age: 20,
+    city: "New York"
+};
+console.log(person.name);
