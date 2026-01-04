@@ -47,3 +47,4 @@ let person = {
     city: "New York"
 };
 console.log(person.name);
+
