@@ -48,3 +48,14 @@ let person = {
 };
 console.log(person.name);
 
+// Loops - loops are used to iterate over a collection of values.
+// for loop - is used to iterate over a collection of values for a fixed number of times.
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
+
+let j = 10;
+while (j > 0) {
+    console.log(j);
+    j--;
+}
